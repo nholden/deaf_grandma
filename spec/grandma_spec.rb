@@ -14,6 +14,10 @@ describe Grandma do
         it 'should respond correctly' do
           expect(@grandma.respond_to(message)).to eql('HUH?  SPEAK UP, SONNY!')
         end
+        it 'should reset bye_count' do
+          @grandma.respond_to('BYE')
+          expect{@grandma.respond_to(message)}.to change {@grandma.bye_count}.by(-1)
+        end 
       end
     end
 
@@ -25,11 +29,15 @@ describe Grandma do
         it 'should respond with a year between 1930 and 1950' do
           expect(@grandma.respond_to(message)[-4..-1].to_i).to be_between(1930, 1950)
         end
+        it 'should reset bye_count' do
+          @grandma.respond_to('BYE')
+          expect{@grandma.respond_to(message)}.to change {@grandma.bye_count}.by(-1)
+        end 
       end
     end
 
     context 'when message is BYE' do
-      it 'should add 1 to @grandma.bye_count' do
+      it 'should add 1 to bye_count' do
         expect{@grandma.respond_to('BYE')}.to change {@grandma.bye_count}.by(1)
       end
     end
