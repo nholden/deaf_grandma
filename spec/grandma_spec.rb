@@ -1,4 +1,4 @@
-require_relative '../deaf_grandma.rb'
+require_relative '../grandma.rb'
 
 describe Grandma do
   describe 'Grandma.respond_to' do

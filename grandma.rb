@@ -7,9 +7,3 @@ class Grandma
     end
   end
 end
-
-while @message != "BYE"
-  print "You: "
-  @message = gets.chomp!
-  puts "Grandma: " + Grandma.respond_to(@message)
-end
