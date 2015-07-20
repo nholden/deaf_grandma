@@ -1,12 +1,12 @@
 require './grandma.rb'
 
-bye_count = 0
+grandma = Grandma.new
 
-while bye_count < 3
+while true
   print "You: "
-  message = gets.chomp!
-  bye_count += 1 if message == "BYE"
-  puts "Grandma: " + Grandma.respond_to(message) if bye_count < 3
+  response = grandma.respond_to(gets.chomp!)
+  break if grandma.bye_count >= 3
+  puts "Grandma: " + response
 end
 
 puts "Grandma: GOODBYE, SONNY!"
