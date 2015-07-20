@@ -1,6 +1,7 @@
 require './grandma.rb'
 
 grandma = Grandma.new
+puts "Grandma: HELLO, SONNY!"
 
 while true
   print "You: "
