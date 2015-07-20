@@ -3,7 +3,7 @@ require_relative '../deaf_grandma.rb'
 describe Grandma do
   describe 'Grandma.respond_to' do
     not_shouted_messages = ["Hi, Grandma.", "Are you feeling 100%?"]
-    shouted_messages = not_shouted_messages.each { |message| message.upcase }
+    shouted_messages = not_shouted_messages.map { |message| message.upcase }
 
     context 'when message is not shouted' do
       not_shouted_messages.each do |message|
