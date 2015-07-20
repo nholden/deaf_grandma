@@ -37,8 +37,48 @@ describe Grandma do
     end
 
     context 'when message is BYE' do
-      it 'should add 1 to bye_count' do
-        expect{@grandma.respond_to('BYE')}.to change {@grandma.bye_count}.by(1)
+      context 'when did not hear BYE' do
+        it 'should add 1 to bye_count' do
+          expect{@grandma.respond_to('BYE')}.to change {@grandma.bye_count}.by(1)
+        end
+        it 'should respond correctly' do
+          expect(@grandma.respond_to('BYE')[0..12]).to eql('NO, NOT SINCE')
+        end
+      end
+   
+      context 'when heard BYE' do
+        before(:each) do
+          allow(@grandma).to receive(:heard_bye?).and_return(true)
+        end
+
+        it 'should add 1 to bye_count' do
+          expect{@grandma.respond_to('BYE')}.to change {@grandma.bye_count}.by(1)
+        end
+        it 'should respond correctly' do
+          expect(@grandma.respond_to('BYE')).to eql('GOODBYE, SONNY!')
+        end
+      end
+    end
+  end
+
+  describe 'heard_bye?' do
+    before(:each) do
+      @grandma = Grandma.new
+    end
+
+    context 'when bye_count is 0' do
+      it 'should return false' do
+        expect(@grandma.heard_bye?).to eql(false)
+      end
+    end
+
+    context 'when bye_count is 3' do
+      before(:each) do
+        @grandma.instance_variable_set(:@bye_count, 3)
+      end
+
+      it 'should return true' do
+        expect(@grandma.heard_bye?).to eql(true)
       end
     end
   end
